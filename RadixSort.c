@@ -2,30 +2,25 @@
 #include<stdlib.h>
 #include<malloc.h>
 
-//global array.
+//global varaibles.
 int *original_array;
 int original_array_length;
-int digits;
 //define functions.
 int getDigit(int num, int round);
 void errorMessage(char * message);
 int *countignSort(int *p);
 int getMax(int *p, int length);
 int *getDigitArray(int *p, int round);
+int *radixSort(int digits);
 
 
 int main()
 {
-	int p[] = { 25, 36, 11, 8, 39, 20, 3, 13, 2, 21, 4, 10, 60, 1 };
+	int p[] = { 25, 136, 11, 458, 39, 20, 53, 413, 2, 21, 4, 100, 60, 1 };
 	original_array = p;
 	original_array_length = sizeof(p) / sizeof(p[0]);
-	digits = 2;
-	int *q;
-	for (int i = 1; i <= digits; i++)
-	{
-		q = countignSort(getDigitArray(original_array, i));
-		original_array = q;
-	}
+	int digits = 3;
+	int *q = radixSort(digits);
 	for (int i = 0; i < original_array_length; i++)
 		printf("%d ", q[i]);
 
@@ -95,4 +90,15 @@ int *getDigitArray(int *p, int round)
 		digit_array[i] = getDigit(original_array[i], round);
 	}
 	return digit_array;
+}
+
+int *radixSort(int digits)
+{
+	int *q = NULL;
+	for (int i = 1; i <= digits; i++)
+	{
+		q = countignSort(getDigitArray(original_array, i));
+		original_array = q;
+	}
+	return q;
 }
